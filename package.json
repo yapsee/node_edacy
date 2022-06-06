@@ -1,0 +1,25 @@
+{
+  "devDependencies": {},
+  "dependencies": {
+    "@ionic/angular": "^4.7.0",
+    "@ionic/cli": "^6.18.1",
+    "body-parser": "^1.20.0",
+    "chalk": "^4.1.2",
+    "dotenv": "^16.0.1",
+    "edacy-files-walk": "^1.0.0",
+    "express": "^4.18.1",
+    "fs": "0.0.1-security",
+    "jsonwebtoken": "^8.5.1",
+    "npm-check-updates": "^12.0.2",
+    "progress": "^2.0.3"
+  },
+  "name": "edacy-digital",
+  "version": "1.0.0",
+  "description": "learning node",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "yapsee",
+  "license": "ISC"
+}
