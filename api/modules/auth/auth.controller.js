@@ -9,12 +9,12 @@ module.exports.register = (req, res) => {
 
 module.exports.login = (req, res) => {
     const data = req.body;
-    const user = AuthService.login(data);
+    const session = AuthService.login(data);
    
-    if(!user) {
+    if(!session) {
         res.status(404).send("User not found!");
     } else {
-        res.send(user)
+        res.send(session)
     }
 }
 

@@ -8,7 +8,7 @@ module.exports = (app) => {
             req.user = tokenValidation;
             next();
         } catch(error) {
-            res.status(401).send('unvalid token');
+            res.status(401).send('invalid token');
         }
 
         // AuthService.verifyToken(authorization)
