@@ -25,8 +25,8 @@ module.exports.findAllReservations = (req, res) => {
 
 module.exports.findOne = (req, res) =>{
 
-  reservationId = req.params.id
-  reservation = reservations.find((reser) => reser.id == reservationId)
+  let reservationId = req.params.id
+  let reservation = reservations.find((reser) => reser.id == reservationId)
   res.send(new ReservationRepository(reservation))
 }
 
