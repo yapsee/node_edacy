@@ -1,4 +1,4 @@
-
+//MIDDLEWARE
 const AuthService = require('./auth.service');
 module.exports = (app) => {
     app.use(async (req, res, next) => {

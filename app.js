@@ -22,24 +22,26 @@ require ('./api/modules/reservations/reservations.routes')(app)
 
 
 
-//var bodyParser = require('body-parser')
-// parse application/x-www-form-urlencoded
-//app.use(bodyParser.urlencoded({ extended: false }))
-// parse application/json
+// var bodyParser = require('body-parser')
+// // parse application/x-www-form-urlencoded
+// app.use(bodyParser.urlencoded({ extended: false }))
+// // parse application/json
 
 
 //  var routes = Files.walk(__dirname + '/api/modules');             // parse all files from 'api/modules'
+
 //  for (var i = 0; i < routes.length; i++)                         // loop to retrieve file by file 
-//    if (routes[i].indexOf('public.routes') !== -1)                      // check if there is a '.routes' files
+//    if (routes[i].indexOf('public.routes') !== -1)               // check if there is a '.public.routes' files
 //    require(routes[i])(app);                                   //require('path_route')(app)
 
-//// USE GUARD MIDDLEWARE
-//require('./api/modules/auth/auth.guard')(app);
+// // USE GUARD MIDDLEWARE
+// require('./api/modules/auth/auth.guard')(app);
 
-//// IMPORT PRIVATE ROUTES
+// // IMPORT PRIVATE ROUTES
 // for (var i = 0; i < routes.length; i++)
 //     if (routes[i].indexOf('routes') !== -1 && routes[i].indexOf('public.routes') === -1)
-//         require(routes[i])(app);
+//     require(routes[i])(app);
+
 
 app.listen(PORT,()=>{
   console.log('server listening')
