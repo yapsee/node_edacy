@@ -1,26 +1,15 @@
-require('jsonwebtoken')
-const users = [
-  {
-    id: 1, username: 'aliou', password: '1234', role: 'ADMIN'
-  },
-  {
-    id: 2, username: 'akhy', password: '1234', role: 'USER'
-  },
-  {
-    id: 3, username: 'kalsoum', password: '1234', role: 'USER'
-  }
-]
+const User = require('./users.schema');
 
-module.exports.signUpUser = (userparams) => {
-
-  let user = {...userparams, role: 'ADMIN', id: users.length + 1}
-  users.push(user)
-  return user
+module.exports.signUpUser = async (userparams) => { 
+  const user = {...userparams, role: 'ADMIN'};
+  console.log(user);
+  const result = await User.create(user);
+  return result;
 
 }
 
-module.exports.findUserByUsername = (username) => {
-  let user =  users.find((user) => user.username === username);
+module.exports.findUserByUsername = async (username) => {
+  const user = await User.findOne({username: username});
   return user
 
 }

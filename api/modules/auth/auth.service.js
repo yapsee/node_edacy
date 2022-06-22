@@ -2,16 +2,16 @@ const UsersService = require('../users/users.service');
 const jwt = require('jsonwebtoken');
 
 
-module.exports.register = ({ username, password }) => {
-    return UsersService.signUpUser({ username, password });
+module.exports.register =  ({ username, password }) => {
+    return  UsersService.signUpUser({ username, password });
 }
 
-module.exports.login = ({ username, password }) => {
-    let user = UsersService.findUserByUsername(username);
+module.exports.login = async ({ username, password }) => {
+    let user = await UsersService.findUserByUsername(username);
     if(!user || user.password !== password) {
         return null;
     } else {
-        user = { ...user };
+        user = { ...user.toObject()};
         delete user.password;
         const token = jwt.sign(user, 'NodeEdacy', { expiresIn: 60 * 60 });
         return { user, token };

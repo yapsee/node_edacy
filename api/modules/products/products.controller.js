@@ -1,50 +1,28 @@
+const productService = require('./products.service');
+const mongoose = require('mongoose');
 
-
-const products = [
-  {
-    id: 1,
-    name: 'iphoneXR',
-    manufacturer: 'Apple'
-  },
-  {
-    id: 3,
-    name: 'samsungs3',
-    manufacturer: 'Samsung'
-  },
-  {
-    id: 6,
-    name: 'mi',
-    manufacturer: 'Xiaomi'
-  }
-]
-
-module.exports.products  = products ;
-
-module.exports.listAllProduct = (req, res) => {
-  res.json(products)
+module.exports.listAllProduct = async (req, res) => {
+  const products = await  productService.listAllProduct();
+  res.send(products)
  } 
 
- module.exports.addProduct = (req, res) => {
- products.push(req.body)
- res.json(req.body)
+ module.exports.addProduct = async (req, res) => {
+   const product = await productService.addProduct(req.body);
+   res.send(product)
  } 
 
- module.exports.deleteProduct = (req, res) => {
-  index = products.findIndex((product) => product.id == req.params.id );
-  products.splice(index,1)
-  res.json({ status: true })
+ module.exports.deleteProduct = async (req, res) => {
+   await productService.deleteProduct(req.params.id);
+  res.send('Deleted')
  } 
 
- module.exports.findProduct = (req, res) => {
-  const id = req.params.id;
-  product = products.find((product) =>product.id == id )
-  res.json(product)
+ module.exports.findProduct = async (req, res) => {
+  const productId = req.params.id;
+  const product = await productService.findProduct(productId);
+  res.send(product)
  } 
 
- module.exports.updateOne = (req, res) => {
-  const productBody = req.body;
-  index = products.findIndex((product) => product.id == req.params.id );
-  product = products[index] = {...products[index], ...productBody}
-  res.json(product)
-
+ module.exports.updateOne = async (req, res) => {
+  const product = await productService.updateOne(req.params.id, req.body);
+  res.send(product)
  } 

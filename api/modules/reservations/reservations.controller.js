@@ -1,50 +1,50 @@
 const ReservationRepository = require("./reservations.repository")
+const Reservation = require("./reservations.schema")
+const mongoose = require('mongoose');
 
-const reservations = [
-    {
-    id: 1,
-    cliendId: 300,
-    productId: 1,
-    count: 1,
-    amount: 600
-  },
-  {
-    id: 2,
-    cliendId: 3,
-    productId: 3,
-    count: 1,
-    amount: 50
-  },
-
-]
-
-
-module.exports.findAllReservations = (req, res) => {
-  res.send(reservations.map((reservation) => new ReservationRepository(reservation)))
+module.exports.findAllReservations = async (req, res) => {
+  const reservations = await Reservation.find().populate('productId');
+  res.send(reservations)
+  
 }
 
-module.exports.findOne = (req, res) =>{
 
+module.exports.findOne = async (req, res) => {
+  var valid = mongoose.Types.ObjectId.isValid(req.params.id);
+  if(valid){
+    let reservationId = req.params.id
+    let result = await Reservation.findOne({_id: reservationId}).populate('productId')
+    res.send(result)
+  }
+  else{ 
+    res.send('Please check your reservation Id')
+  }
+ 
+}
+
+module.exports.deleteOne = async (req, res) => {
   let reservationId = req.params.id
-  let reservation = reservations.find((reser) => reser.id == reservationId)
-  res.send(new ReservationRepository(reservation))
-}
-
-module.exports.deleteOne = (req, res) =>{
-  index = reservations.findIndex((reser) =>reser.id == req.params.id )
-  reservations.splice(index, 1)
+  await Reservation.findOneAndDelete({id: reservationId})
   res.send('Deleted')
 }
 
-module.exports.insertOne =  (req, res) => {
+module.exports.insertOne =  async (req, res) => {
   let user = req.user
-  let reservation = {...req.body, clientId: user.id}
-  reservations.push(reservation);
-  res.send(reservation)
+  let reservation = req.body
+  reservation.clientId = user
+  const result = await Reservation.create(reservation)
+  res.send(result)
 }
 
-module.exports.updateOne =  (req, res) => {
-  index = reservations.findIndex((reser) =>reser.id == req.params.id )                    
-  reservation = reservations[index]= {...reservations[index], ...req.body};
-  res.send(reservation)
+module.exports.updateOne = async  (req, res) => {
+  var valid = mongoose.Types.ObjectId.isValid(req.params.id);
+  if(valid){
+    let reservationId = req.params.id
+    let result = await Reservation.findOneAndUpdate({_id: reservationId}, req.body).populate('productId')
+    res.send(result)
+  }
+  else{ 
+    res.send('Please check your reservation Id')
+  }
+    
 }
