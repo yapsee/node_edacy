@@ -1,4 +1,3 @@
-const ReservationRepository = require("./reservations.repository")
 const Reservation = require("./reservations.schema")
 const mongoose = require('mongoose');
 

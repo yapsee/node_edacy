@@ -6,7 +6,7 @@ const reservationsschema = new mongoose.Schema({
     count: {type: Number},
     amount: {type: Number}
 
-});
+},{timestamps: true});
 
 const  model = mongoose.model('reservation', reservationsschema);
 module.exports = model;
